@@ -1,3 +1,7 @@
+// Me dijiste que te ponga aquí que este proyecto lo tomarás como si fué entregado en clase para lo de los 2 puntos extra 
+// graicas :)
+
+
 function tortas(dias){
   var totales =  new Array(5);
   var ganancia_dia = 0;
