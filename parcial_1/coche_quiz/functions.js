@@ -27,7 +27,7 @@ function coche(dias){
 
     for(var j = 0; j < carros_por_dia; j++){
       costo = 0;
-      carr_type = Math.floor(Math.random() * 2);
+      carr_type = Math.floor(Math.random() * 3);
       rand_general = Math.random() * 1;
       if(carr_type == 0){
         if(rand_general <= .45){
@@ -71,34 +71,36 @@ function coche(dias){
       costo_total += costo;
     }
     costo_todo += costo_total;
-    console.log(costo_total);
     arr.push(costo_total);
   }
 
   promedio = costo_todo/dias;
   standar = math.std(arr);
-  // var a75 = promedio + standar *
-  var a95 = promedio + (standar/ Math.sqrt(dias)) * 1.96;
-  var b95 = promedio - (standar/ Math.sqrt(dias)) * -1.96;
+  var a95 = promedio + ((standar/ Math.sqrt(dias)) * 1.96);
+  var b95 = promedio - ((standar/ Math.sqrt(dias)) * -1.96);
+  var a90 = promedio + ((standar/ Math.sqrt(dias)) * 1.65);
+  var b90 = promedio - ((standar/ Math.sqrt(dias)) * -1.65);
+  var a85 = promedio + ((standar/ Math.sqrt(dias)) * 1.42);
+  var b85 = promedio - ((standar/ Math.sqrt(dias)) * -1.42);
+  var a80 = promedio + ((standar/ Math.sqrt(dias)) * 1.28);
+  var b80 = promedio - ((standar/ Math.sqrt(dias)) * -1.28);
+  var a75 = promedio + ((standar/ Math.sqrt(dias)) * 1.15);
+  var b75 = promedio - ((standar/ Math.sqrt(dias)) * -1.15);
+
 
   console.log("pr " + promedio);
-  console.log("standar  " + standar);
-  console.log(a95);
-  console.log(b95);
+  console.log("standar " + standar);
 
-
-
-
-  // document.getElementById("a75").innerHTML = a75;
-  // document.getElementById("a80").innerHTML = a80;
-  // document.getElementById("a85").innerHTML = a85;
-  // document.getElementById("a90").innerHTML = a90;
-  // document.getElementById("a95").innerHTML = a95;
-  // document.getElementById("b75").innerHTML = b75;
-  // document.getElementById("b80").innerHTML = b80;
-  // document.getElementById("b85").innerHTML = b85;
-  // document.getElementById("b90").innerHTML = b90;
-  // document.getElementById("b95").innerHTML = b95;
+  document.getElementById("a75").innerHTML = a75;
+  document.getElementById("a80").innerHTML = a80;
+  document.getElementById("a85").innerHTML = a85;
+  document.getElementById("a90").innerHTML = a90;
+  document.getElementById("a95").innerHTML = a95;
+  document.getElementById("b75").innerHTML = b75;
+  document.getElementById("b80").innerHTML = b80;
+  document.getElementById("b85").innerHTML = b85;
+  document.getElementById("b90").innerHTML = b90;
+  document.getElementById("b95").innerHTML = b95;
 }
 
 coche(5000);
