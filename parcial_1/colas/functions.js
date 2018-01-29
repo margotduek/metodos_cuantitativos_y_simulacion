@@ -1,4 +1,5 @@
 function tiempo_de_servicio3(i){
+
   if(arguments[i + 1] <= 0.05){
     //tiempo de servicio 20
     tiempo = 20;
@@ -31,15 +32,13 @@ function tiempo_de_servicio3(i){
 }
 
 function cola(){
-  var sum = 0;
-  for(var i = 0; i < arguments.length; i++){
-    sum += arguments[i];
-  }
+  var length = arguments.length;
   var equipo_de_personas = 3;
 
   var cola = 0;
+  var comieron = false;
   var termina = [];
-  var tiempo_de_servicio3 = [];
+  var tiempo_de_servicio3arr = [];
   var tiempo_de_servicio4 = [];
   var tiempo_de_servicio5 = [];
   var tiempo_de_servicio6 = [];
@@ -47,8 +46,9 @@ function cola(){
   var termina = [];
   var tiempo_entre_llegadas = [];
   var hora_de_llegada_camion = [];
+  var ocio = [];
 
-  for(var i = 0; i < arguments.lenght ; i++){
+  for( i = 0; i < length ; i++){
     if(arguments[i] <= 0.02){
       tiempo_entre_llegadas.push(20);
     }else if (arguments[i] > 0.02 && arguments[i] <= 0.10) {
@@ -68,25 +68,34 @@ function cola(){
     }else if (arguments[i] > 0.97 && arguments[i] <= 1){
       tiempo_entre_llegadas.push(60);
     }
-    tiempo_de_servicio3.push(tiempo_de_servicio3(i, 0.83761,0.14387,0.51321,0.72472,0.05466,0.84609,0.29735,0.59076,0.76355,0.29549,0.61958,0.17267,0.10061,0.45645,0.86754,0.35340));
+    tiempo_de_servicio3arr.push( tiempo_de_servicio3(i, 0.83761,0.14387,0.51321,0.72472,0.05466,0.84609,0.29735,0.59076,0.76355,0.29549,0.61958,0.17267,0.10061,0.45645,0.86754,0.35340));
     // tiempo_de_servicio4 = tiempo_de_servicio4(i, TODOS LOS NUMEROS AQUI);
     // tiempo_de_servicio5 = tiempo_de_servicio5(i, TODOS LOS NUMEROS AQUI);
     // tiempo_de_servicio6 = tiempo_de_servicio6(i, TODOS LOS NUMEROS AQUI);
 
+    if(hora_de_llegada_camion[i] >= 240 && !comieron){
+      comieron = true;
+      cola += 30;
+    }
     // total minutos entre las 11 y las 730  = 510
     if(i == 0){
       hora_de_llegada_camion.push(tiempo_entre_llegadas[i]);
       cola = 0;
     }else{
       hora_de_llegada_camion.push(hora_de_llegada_camion[i - 1] + tiempo_entre_llegadas[i]);
+      ocio[i] = hora_de_llegada_camion[i] - termina[i - 1];
       cola = termina[i - 1] - hora_de_llegada_camion[i];
       if(cola < 0){
         cola = 0;
       }
     }
     inicia_servicio.push(hora_de_llegada_camion[i] + cola);
-    termina[i] = inicia_servicio[i] + tiempo_de_servicio3;
-    console.log( tiempo_entre_llegadas[i] + " | " + hora_de_llegada_camion[i] + " | " + inicia_servicio[i] + " | " + tiempo_de_servicio3[i] + " | " + cola);
+    termina[i] = inicia_servicio[i] + tiempo_de_servicio3arr[i];
+    if(hora_de_llegada_camion[i] >= 510){
+      console.log("No se realizará servicio");
+    }else{
+      console.log( tiempo_entre_llegadas[i] + " | " + hora_de_llegada_camion[i] + " | " + inicia_servicio[i] + " | " + tiempo_de_servicio3arr[i] + " | " + cola);
+    }
   }
 
 }
