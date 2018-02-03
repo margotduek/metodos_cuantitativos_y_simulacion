@@ -19,7 +19,7 @@ function costo(months, ingreso){
     }
     subtotal += ingreso - costo_transporte;
     if(subtotal < 0){
-      subtotal -= ingreso * .15;
+      subtotal -= ingreso * .20;
     }else{
       subtotal -= subtotal * .4;
     }
