@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Examen</title>
+
+  <!-- include jStat: https://jstat.github.io/all.html -->
+  <script src="http://cdn.jsdelivr.net/npm/jstat@latest/dist/jstat.min.js"></script>
+</head>
+<body>
+
+
+  <script type="text/javascript">
+    // Funcion creada por jginsbur
+    function probabilidad(min, max, random) {
+      return min <= random && random < max;
+    }
+    function interarri(num){
+      if(probabilidad(0,0.2,num)) return 1;
+      if(probabilidad(0.2, 0.45,num)) return 2;
+      if(probabilidad(0.45,0.75,num)) return 3;
+      if(probabilidad(0.75,0.9,num)) return 4;
+      if(probabilidad(0.9,1,num)) return 5;
+    }
+    function serv(num){
+      if(probabilidad(0,0.1,num)) return 1;
+      if(probabilidad(0.1, 0.25,num)) return 2;
+      if(probabilidad(0.25,0.6,num)) return 3;
+      if(probabilidad(0.6,0.75,num)) return 4;
+      if(probabilidad(0.75,0.9,num)) return 5;
+      if(probabilidad(0.9,1,num)) return 6;
+    }
+    function ventanilla(){
+      var espera_minutos = 1;
+      var minutos = 60;
+      var costo_anual_construccion_1 = 12000;
+      var costo_anual_construccion_2 = 20000;
+      var interarrival= [52,37,82,69,98,96,33,50,88,90,50,27,45,81,66,74,30,59,67,28,02,74,35,24,03,29,60,74,85,90];
+      var service = [60,60,80,53,69,37,06,63,57,02,94,52,69,33,32,30,48,88,33,48,72,33,62,13,74,68,22,44,42,09];
+      var tiempo_interllegadas_1 = 0;
+      var tiempo_interllegadas_2 = 0;
+      var tiempo_servicio_1 = 0;
+      var tiempo_servicio_2 = 0;
+      var tiempo_que_falta = 0;
+      var tiempo_que_falta2 = 0;
+      var tiempo_total = 0;
+
+
+
+      while(tiempo_total <= 60){
+        for( i = 0; i < interarrival.length; i++){
+          var x = interarrival[i]*0.01;
+          tiempo_interllegadas_1 = interarri(x);
+          tiempo_total += tiempo_interllegadas_1;
+          var x = service[i]*0.01;
+          tiempo_servicio_1 = serv(x);
+
+          tiempo_que_falta += tiempo_servicio_1 - tiempo_interllegadas_1 ;
+          if(tiempo_interllegadas_1 < tiempo_servicio_1){
+
+          }
+          // console.log(tiempo_servicio_1 + " - " + tiempo_interllegadas_1 + " = " + tiempo_que_falta);
+        }
+      }
+      var tiempos_faltantes = tiempo_que_falta * 7 * 200;
+      var costos_totales = costo_anual_construccion_1 + 16000 /*salarios*/ + tiempos_faltantes;
+
+      console.log(" con una ventanilla te hacen falta 8 minutos que es equivalente a $8 en tiempos de espera");
+      console.log(" con dos ventanillas sobraría tiempo")
+      console.log(" en un año con una ventanilla saldría en " + costos_totales);
+      console.log(" el costo de pura perdida de buena voluntad saldría en " + tiempos_faltantes);
+    }
+    ventanilla();
+
+
+  </script>
+
+</body>
+</html>
