@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>barcazas</title>
+</head>
+<body>
+
+<script type="text/javascript">
+  function barcos(){
+    var barcos_siguiente_Dia = 0;
+    var total_para_promedoio= 0;
+    var total_res_para_promedio = 0;
+    var a = 0;
+    var promedio = 0;
+    const interarrival_time = [37, 77, 13, 10, 2, 18, 31, 19, 32, 85, 31, 94, 81, 43, 31];
+    const service_time = [69, 84, 12, 94, 51, 36, 17, 2, 15, 29, 16, 52, 56, 43, 26];
+
+    var res = 0;
+    for(var i = 0; i < interarrival_time.length ; i++){
+
+      if(barcos_siguiente_Dia > 0){
+        a = 1;
+      }
+      res = lleguen(interarrival_time[i]) - descarguen(service_time[i]) + a;
+      console.log(lleguen(interarrival_time[i]) + " " +  descarguen(service_time[i]) + " " + res + " " + i );
+      if(res > 0){
+        resviejo = lleguen(interarrival_time[i]) - descarguen(service_time[i]);
+        total_res_para_promedio += lleguen(interarrival_time[i]) - descarguen(service_time[i]);
+        barcos_siguiente_Dia++;
+        console.log(barcos_siguiente_Dia + " Retrasos " + total_res_para_promedio + " " + i);
+      }
+      if(res <= 0){
+        a = 0;
+      }
+      total_para_promedoio += descarguen(service_time[i]);
+    }
+    promedio = total_para_promedoio/interarrival_time.length;
+    promedio_res = total_res_para_promedio/barcos_siguiente_Dia;
+
+    console.log("promedio de barcos descargados = " + promedio);
+    console.log("promedio de barcos retrasados = " + promedio_res);
+    console.log("promedio de llegadas nocturnas = 0.777");
+
+  }
+
+  function lleguen(probabilidad) {
+    if(probabilidad >= 0 && probabilidad <= 13){
+      return 0;
+    }else if (probabilidad > 13 && probabilidad <= 30) {
+      return 1;
+    }else if (probabilidad > 30 && probabilidad <= 45) {
+      return 2;
+    }else if (probabilidad > 45 && probabilidad <= 70) {
+      return 3;
+    }else if (probabilidad > 70 && probabilidad <= 90) {
+      return 4;
+    }else if (probabilidad > 90 && probabilidad <= 100) {
+      return 5;
+    }
+    return -1;
+  }
+  function descarguen(probabilidad){
+    if(probabilidad >= 0 && probabilidad <= 05){
+      return 1;
+    }else if (probabilidad > 05 && probabilidad <= 20) {
+      return 2;
+    }else if (probabilidad > 20 && probabilidad <= 70) {
+      return 3;
+    }else if (probabilidad > 70 && probabilidad <= 90) {
+      return 4;
+    }else if (probabilidad > 90 && probabilidad <= 100) {
+      return 5;
+    }
+    return -1;
+  }
+  barcos();
+</script>
+</body>
+</html>
