@@ -42,6 +42,7 @@ const C = 453;
 const M = 2147483648;
 const CANT_TARJETAS_REAL = 50000;
 const CANT_TARJETAS_FAKE = 7000;
+const VOTANTES = 53273836;
 var I1 = 753363737;
 var I2 = 701747156;
 var concat;
@@ -166,3 +167,45 @@ function fraude( tarjetas ){
 }
 
 fraude(tarjetas);
+
+function simulacion(){
+  var votantes = VOTANTES;
+  var Lopez = 0;
+  var Meade = 0;
+  var Anaya = 0;
+  var Marga = 0;
+  var Anulado = 1.41;
+  var fuera_Del_pais = 0.05;
+  var acarreados = 15.96;
+  var cambio_de_ultimo = 4.56;
+  var Duros = 45.369;
+  // anulan 1.41
+  // si vota el 60.65
+  for(var i = 0; i < votantes; i++){
+    rand_general = Math.random();
+    if(rand_general <= .78){
+      Lopez ++;
+    }else if(rand_general > .78 && rand_general <= .94){
+      Anaya++;
+    }else if(rand_general > .94 && rand_general <= .99){
+      Meade++;
+    }else if(rand_general > .99 && rand_general <= 1){
+      Marga++;
+    }
+  }
+  document.getElementById("Lopez").innerHTML = Lopez;
+  document.getElementById("Anaya").innerHTML = Anaya;
+  document.getElementById("Meade").innerHTML = Meade;
+  document.getElementById("Marga").innerHTML = Marga;
+  document.getElementById("Anulado").innerHTML = Anulado;
+  document.getElementById("fuera_Del_pais").innerHTML = fuera_Del_pais;
+  document.getElementById("acarreados").innerHTML = acarreados;
+  document.getElementById("Duros").innerHTML = Duros;
+  document.getElementById("cambio_de_ultimo").innerHTML = cambio_de_ultimo;
+  document.getElementById("Lopez1").innerHTML = Lopez/votantes;
+  document.getElementById("Anaya1").innerHTML = Anaya/votantes;
+  document.getElementById("Meade1").innerHTML = Meade/votantes;
+  document.getElementById("Marga1").innerHTML = Marga/votantes;
+}
+
+simulacion();
